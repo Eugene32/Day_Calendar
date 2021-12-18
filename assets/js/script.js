@@ -13,28 +13,18 @@ var displayHourNow = $('#hourNow');
 
 setInterval ( timeTracking , 1000);
 
+$('.hidden').hide();
 
 function timeTracking () {
 
     hourNowDisplay = moment().format('hA');
     var currentDate = moment().format('dddd[,] MMMM Do');  
     dateToday.innerHTML = currentDate;
-    var currentHour = moment().format('H');
-
-    nineAMBlock.text(nineAMBlockTime);
-  
-    console.log(hiddenHour);
-    console.log(currentHour);
-  
-
-    if (hiddenHour < currentHour){
-        console.log('This');
-    }
-
+    nineAMBlock.children().eq(3).text(hiddenHour);
 
 }
 
-console.log(dayBlock.children().eq(0).children().eq(0).text());
+
 
 
 
