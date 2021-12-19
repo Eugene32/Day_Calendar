@@ -60,24 +60,23 @@ dayBlock.on('click', '.saveBtn', function (event) {
 
 
     var btnClicked = $(event.target);
+    var sectionID = btnClicked.parent().attr('id');
+    
     var textEntry = btnClicked.siblings('input').val();
-    var textEntryMarker = btnClicked.siblings('.hidden').text();
+    
     
     var tempObj = {};
 
-    tempObj.marker = textEntryMarker;
+    tempObj.marker = sectionID;
     tempObj.data = textEntry;
 
     myObj.push(tempObj);
 
-    console.log(textEntryMarker);
-    console.log(textEntry);
-    console.log(myObj);
-
-
+    
     localStorage.setItem( 'dayList', JSON.stringify(myObj));
     // var sectionBlock = btnClicked.parent('section');   
     // var textEntryMarker = sectionBlock.children().eq(0).text();
+    //var textEntryMarker = btnClicked.siblings('.hidden').text();
  
  
 
