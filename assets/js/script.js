@@ -5,12 +5,10 @@ var nineAMBlock = $('#nineAM');
 var nineAMBlockTime = moment('9AM', 'hA').format('hA');
 var plusOneHour = moment('9AM', 'hA').add(1, 'h').format('hA');
 var hiddenHour;
-
-
-
 var displayHourNow = $('#hourNow');
-
-
+var textEntry;
+var locData = [];
+var myObj = [];
 
 $('.hidden').hide();
 
@@ -22,18 +20,23 @@ for (var x = 0; x < dayBlock.children().length; x++) {
 
 }
 
-setInterval(timeTracking, 1000);
+setInterval(timeTracking, 100);
+
 function timeTracking() {
 
-    //hourNowDisplay = moment().format('hA');
     var currentDate = moment().format('dddd[,] MMMM Do');
     dateToday.innerHTML = currentDate;
-    var currentHour = moment().format('HH');
+
+    scanTimeBlocks();
+
+}
+
+function scanTimeBlocks() {
 
     for (var x = 0; x < dayBlock.children().length; x++) {
 
         var hiddenHour = dayBlock.children().eq(x).children().eq(3).html();
-        console.log(hiddenHour);
+        var currentHour = moment().format('HH');
 
         if (hiddenHour) {
             if (hiddenHour < currentHour) {
@@ -53,6 +56,32 @@ function timeTracking() {
 
 
 
+dayBlock.on('click', '.saveBtn', function (event) {
 
+
+    var btnClicked = $(event.target);
+    var textEntry = btnClicked.siblings('input').val();
+    var textEntryMarker = btnClicked.siblings('.hidden').text();
+    
+    var tempObj = {};
+
+    tempObj.marker = textEntryMarker;
+    tempObj.data = textEntry;
+
+    myObj.push(tempObj);
+
+    console.log(textEntryMarker);
+    console.log(textEntry);
+    console.log(myObj);
+
+
+    localStorage.setItem( 'dayList', JSON.stringify(myObj));
+    // var sectionBlock = btnClicked.parent('section');   
+    // var textEntryMarker = sectionBlock.children().eq(0).text();
+ 
+ 
+
+
+});
 
 
