@@ -58,28 +58,35 @@ function scanTimeBlocks() {
 
 dayBlock.on('click', '.saveBtn', function (event) {
 
-
     var btnClicked = $(event.target);
     var sectionID = btnClicked.parent().attr('id');
-    
     var textEntry = btnClicked.siblings('input').val();
-    
-    
+
     var tempObj = {};
 
     tempObj.marker = sectionID;
     tempObj.data = textEntry;
 
-    myObj.push(tempObj);
+    // Search through myObj for the same sectionID
+    var indexPos = -1
 
-    
-    localStorage.setItem( 'dayList', JSON.stringify(myObj));
-    // var sectionBlock = btnClicked.parent('section');   
-    // var textEntryMarker = sectionBlock.children().eq(0).text();
-    //var textEntryMarker = btnClicked.siblings('.hidden').text();
- 
- 
+    for (i = 0; i < myObj.length; i++) {
+        if (myObj[i].marker === sectionID) {
+            indexPos = i;
+            break;
+        }
 
+    }
+
+    if (indexPos === -1) {
+        myObj.push(tempObj);
+        console.log('Object had been push to the array.');
+    }
+    else{
+        myObj[indexPos].data = textEntry;
+        console.log(myObj[indexPos].data + ' had been replaced');
+    }
+    localStorage.setItem('dayList', JSON.stringify(myObj));
 
 });
 
