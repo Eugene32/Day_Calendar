@@ -10,7 +10,7 @@ var textEntry;
 var locData = [];
 var myObj = [];
 
-$('.hidden').hide();
+$('.hidden').hide();  //hides the container of hour.
 
 // Filling the hidden div class with time (hour)
 for (var x = 0; x < dayBlock.children().length; x++) {
@@ -22,6 +22,7 @@ for (var x = 0; x < dayBlock.children().length; x++) {
 
 setInterval(timeTracking, 100);
 
+//setInterval function
 function timeTracking() {
 
     var currentDate = moment().format('dddd[,] MMMM Do');
@@ -31,6 +32,7 @@ function timeTracking() {
 
 }
 
+//Changes the background color depending on the current hour
 function scanTimeBlocks() {
 
     for (var x = 0; x < dayBlock.children().length; x++) {
@@ -55,9 +57,24 @@ function scanTimeBlocks() {
 }
 
 
+// Data retrieval and display
+if (localStorage.length){
+    var tempStringList = localStorage.getItem('dayList');
+    myObj = JSON.parse(tempStringList);
+      
+    for (var i = 0 ; i < myObj.length; i++){
+               
+        var ptr = document.getElementById(myObj[i].marker);
+        ptr.children[1].value = myObj[i].data;
+        
+    }
 
+}
+
+
+// Save the data to the local storage
 dayBlock.on('click', '.saveBtn', function (event) {
-
+    console.log(myObj);
     var btnClicked = $(event.target);
     var sectionID = btnClicked.parent().attr('id');
     var textEntry = btnClicked.siblings('input').val();
@@ -69,25 +86,31 @@ dayBlock.on('click', '.saveBtn', function (event) {
 
     // Search through myObj for the same sectionID
     var indexPos = -1
+    if (myObj) {
+        for (i = 0; i < myObj.length; i++) {
+            if (myObj[i].marker === sectionID) {
+                indexPos = i;
+                break;
+            }
 
-    for (i = 0; i < myObj.length; i++) {
-        if (myObj[i].marker === sectionID) {
-            indexPos = i;
-            break;
         }
 
+        if (indexPos === -1) {
+            myObj.push(tempObj);
+            console.log('Object had been push to the array.');
+        }
+        else {
+            myObj[indexPos].data = textEntry;
+            console.log(myObj[indexPos].data + ' had been replaced');
+        }
+        localStorage.setItem('dayList', JSON.stringify(myObj));
     }
-
-    if (indexPos === -1) {
-        myObj.push(tempObj);
-        console.log('Object had been push to the array.');
-    }
-    else{
-        myObj[indexPos].data = textEntry;
-        console.log(myObj[indexPos].data + ' had been replaced');
-    }
-    localStorage.setItem('dayList', JSON.stringify(myObj));
 
 });
 
-
+/*
+    To make this page more flexible: 
+        - hour display on the html should be dependent on the loop that fills the hidden div that contains the hour.  
+        - user should have an option to choose the 'working hour.
+        - Web API should be used to display the day calendar as to adopt to the choices of the user.
+*/

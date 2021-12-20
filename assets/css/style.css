@@ -73,7 +73,3 @@ textarea {
   transition: all 0.3s ease-in-out;
 }
 
-/* To be used to know the boundaries of the element */
-.borderline{
-  border: 2px solid black;
-}
