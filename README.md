@@ -18,6 +18,7 @@ This web page is similar to a day planner where:
 Web page link --> [Day Planner](https://eugene32.github.io/Day_Planner/)
 
 Web page preview:
+
 ![alt text][logo]
 
 [logo]: assets/05-third-party-apis-homework-demo.gif "Day Planner"
