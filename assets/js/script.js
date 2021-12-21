@@ -22,18 +22,19 @@ for (var x = 0; x < dayBlock.children().length; x++) {
 
 }
 
-// Provides internal refresh routine to scan system time.
-setInterval(timeTracking, 100);
+// Provides internal refresh routine to scan for current date.
+setInterval(timeTracking, 1000);
 
-//setInterval function
+//setInterval function to refresh each 'timeblocks'
 function timeTracking() {
 
     var currentDate = moment().format('dddd[,] MMMM Do');
     dateToday.innerHTML = currentDate;
 
-    scanTimeBlocks();
-
 }
+
+//
+setInterval(scanTimeBlocks, 500);
 
 //Changes the background color depending on the current hour
 function scanTimeBlocks() {
@@ -77,7 +78,7 @@ if (localStorage.length){
 
 // Save the data to the local storage
 dayBlock.on('click', '.saveBtn', function (event) {
-    console.log(myObj);
+    
     var btnClicked = $(event.target);
     var sectionID = btnClicked.parent().attr('id');
     var textEntry = btnClicked.siblings('input').val();
@@ -100,7 +101,7 @@ dayBlock.on('click', '.saveBtn', function (event) {
 
         if (indexPos === -1) {
             myObj.push(tempObj);
-            console.log('Object had been push to the array.');
+            
         }
         else {
             myObj[indexPos].data = textEntry;
