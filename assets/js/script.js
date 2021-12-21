@@ -7,8 +7,10 @@ var plusOneHour = moment('9AM', 'hA').add(1, 'h').format('hA');
 var hiddenHour;
 var displayHourNow = $('#hourNow');
 var textEntry;
-var locData = [];
 var myObj = [];
+
+
+
 
 $('.hidden').hide();  //hides the container of hour.
 
@@ -20,6 +22,7 @@ for (var x = 0; x < dayBlock.children().length; x++) {
 
 }
 
+// Provides internal refresh routine to scan system time.
 setInterval(timeTracking, 100);
 
 //setInterval function
