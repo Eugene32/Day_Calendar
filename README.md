@@ -9,7 +9,7 @@ This web page is similar to a day planner where:
     - Past hours will be in gray.
     - Current time on the planner will be in red.
     - The rest of the time will be in green denoting that it is still in the future.
- - This page utilizes third-party APIs like Bootstrap, JQuery and moment.js.
+ - This page utilizes third-party APIs like Bootstrap, JQuery and momentjs.
  - Limitations:
     - This web page does not take into consideration the change in date.
         - Entries will still be the same thing that will be reflected on all days.
