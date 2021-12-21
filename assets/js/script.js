@@ -108,6 +108,12 @@ dayBlock.on('click', '.saveBtn', function (event) {
 
 });
 
+
+var footerEl = document.createElement('h4');
+footerEl.innerHTML = '&copy &#x1d19&#670 2021';
+footerEl.classList.add('footer');
+document.body.appendChild(footerEl);
+
 /*
     To make this page more flexible: 
         - hour display on the html should be dependent on the loop that fills the hidden div that contains the hour.  
