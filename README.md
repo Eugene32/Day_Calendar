@@ -15,11 +15,9 @@ This web page is similar to a day planner where:
     - Range of the day planner is static.
 
 
-Web page link --> [Day Planner]()
-
-Web page video --> [Day Planner](https://watch.screencastify.com/v/a8jLEuFpYRggUzDPUIu4)
+Web page link --> [Day Planner](https://eugene32.github.io/Day_Planner/)
 
 Web page preview:
 ![alt text][logo]
 
-[logo]: assets/Web-DevOps-Quiz-demo.png "Day Planner"
+[logo]: (assets/05-third-party-apis-homework-demo.gif) "Day Planner"
