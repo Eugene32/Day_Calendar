@@ -1,4 +1,4 @@
-# Day_Calendar
+# Day_Planner
 
 This web page is similar to a day planner where:
  - The day is divided by hour from 9AM to 5PM.
@@ -10,7 +10,16 @@ This web page is similar to a day planner where:
     - Current time on the planner will be in red.
     - The rest of the time will be in green denoting that it is still in the future.
  - Limitations:
-    - This web page does not take into consideration the system date.
-        - Entries will still be the same thing that will be reflected tomorrow - if saved.
+    - This web page does not take into consideration the change in date.
+        - Entries will still be the same thing that will be reflected on all days.
     - Range of the day planner is static.
 
+
+Web page link --> [Day Planner]()
+
+Web page video --> [Day Planner](https://watch.screencastify.com/v/a8jLEuFpYRggUzDPUIu4)
+
+Web page preview:
+![alt text][logo]
+
+[logo]: assets/Web-DevOps-Quiz-demo.png "Day Planner"
