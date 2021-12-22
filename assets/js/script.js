@@ -10,15 +10,14 @@ var textEntry;
 var myObj = [];
 
 
-
-
 $('.hidden').hide();  //hides the container of hour.
 
 // Filling the hidden div class with time (hour)
 for (var x = 0; x < dayBlock.children().length; x++) {
 
-    var time = moment('9AM', 'hA').add(x, 'h').format('HH');
-    dayBlock.children().eq(x).children().eq(3).text(time);
+    
+    var time = moment('9AM', 'hA').add(x, 'h').format('hA');
+    var timetoNum = parseInt(time);
 
 }
 
@@ -33,7 +32,7 @@ function timeTracking() {
 
 }
 
-//
+// Serves as a scan for the row's hour versus system time hour.
 setInterval(scanTimeBlocks, 500);
 
 //Changes the background color depending on the current hour
@@ -44,9 +43,9 @@ function scanTimeBlocks() {
         var hiddenHour = dayBlock.children().eq(x).children().eq(3).html();
         var currentHour = moment().format('HH');
 
-        if (hiddenHour) {
+        if (hiddenHour) {                                                           // If hiddenHour is not empty  add a CSS class to format background color
             if (hiddenHour < currentHour) {
-                dayBlock.children().eq(x).children().eq(1).addClass('past');
+                dayBlock.children().eq(x).children().eq(1).addClass('past');        
             }
             else if (hiddenHour == currentHour) {
                 dayBlock.children().eq(x).children().eq(1).addClass('present');
@@ -62,15 +61,16 @@ function scanTimeBlocks() {
 
 
 // Data retrieval and display
-if (localStorage.length){
+if (localStorage.length) {
+
     var tempStringList = localStorage.getItem('dayList');
     myObj = JSON.parse(tempStringList);
-      
-    for (var i = 0 ; i < myObj.length; i++){
-               
+
+    for (var i = 0; i < myObj.length; i++) {
+
         var ptr = document.getElementById(myObj[i].marker);
         ptr.children[1].value = myObj[i].data;
-        
+
     }
 
 }
@@ -78,36 +78,41 @@ if (localStorage.length){
 
 // Save the data to the local storage
 dayBlock.on('click', '.saveBtn', function (event) {
-    
-    var btnClicked = $(event.target);
-    var sectionID = btnClicked.parent().attr('id');
-    var textEntry = btnClicked.siblings('input').val();
 
-    var tempObj = {};
+    var btnClicked = $(event.target);                       // Determines which child element from the 'timeblock' got the click event and assign element to btnClicked.
+    var sectionID = btnClicked.parent().attr('id');         // Determines the row that is receiving the 'click' event.
+    var textEntry = btnClicked.siblings('input').val();     // Extracts the data entry. 
 
-    tempObj.marker = sectionID;
-    tempObj.data = textEntry;
+    var tempObj = {};                                       // Creates a obj data.
+
+    tempObj.marker = sectionID;                             // saves the pointer to tempObj.
+    tempObj.data = textEntry;                               // saves the point to tempObj
+
+
+    var indexPos = -1                                       // Intialize a flag - (-1 as not found to be a default for the array search)
 
     // Search through myObj for the same sectionID
-    var indexPos = -1
     if (myObj) {
         for (i = 0; i < myObj.length; i++) {
-            if (myObj[i].marker === sectionID) {
-                indexPos = i;
-                break;
+
+            if (myObj[i].marker === sectionID) {            // Test if sectionID matches an entry in myObj.marker
+                indexPos = i;                               // saves the index position
+                break;                                      // exits the loop if a match is found
             }
 
         }
 
         if (indexPos === -1) {
-            myObj.push(tempObj);
-            
+
+            myObj.push(tempObj);                            // add the tempObj to myObj if there is not previous entry of the same marker.
+
         }
         else {
-            myObj[indexPos].data = textEntry;
-            console.log(myObj[indexPos].data + ' had been replaced');
+
+            myObj[indexPos].data = textEntry;               // replaces the old entry for data as a match had been found.
+
         }
-        localStorage.setItem('dayList', JSON.stringify(myObj));
+        localStorage.setItem('dayList', JSON.stringify(myObj));     // saves the myObj array to local storage.
     }
 
 });
