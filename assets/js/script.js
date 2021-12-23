@@ -16,8 +16,8 @@ $('.hidden').hide();  //hides the container of hour.
 for (var x = 0; x < dayBlock.children().length; x++) {
 
     
-    var time = moment('9AM', 'hA').add(x, 'h').format('hA');
-    var timetoNum = parseInt(time);
+    var time = moment('9AM', 'hA').add(x, 'h').format('HH');
+    dayBlock.children().eq(x).children().eq(3).text(time);
 
 }
 
