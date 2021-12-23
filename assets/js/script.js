@@ -15,7 +15,6 @@ $('.hidden').hide();  //hides the container of hour.
 // Filling the hidden div class with time (hour)
 for (var x = 0; x < dayBlock.children().length; x++) {
 
-    
     var time = moment('9AM', 'hA').add(x, 'h').format('HH');
     dayBlock.children().eq(x).children().eq(3).text(time);
 
@@ -45,7 +44,7 @@ function scanTimeBlocks() {
 
         if (hiddenHour) {                                                           // If hiddenHour is not empty  add a CSS class to format background color
             if (hiddenHour < currentHour) {
-                dayBlock.children().eq(x).children().eq(1).addClass('past');        
+                dayBlock.children().eq(x).children().eq(1).addClass('past');
             }
             else if (hiddenHour == currentHour) {
                 dayBlock.children().eq(x).children().eq(1).addClass('present');
